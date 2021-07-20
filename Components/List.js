@@ -1,31 +1,35 @@
 import React from 'react';
-import { Text ,View,SafeAreaView,ScrollView } from 'react-native';
-import { ListItem, Avatar } from 'react-native-elements'
+import { Text ,View,SafeAreaView,ScrollView, TouchableOpacity} from 'react-native';
 import list from './Movielist';
+import ItemView from './ItemView';
 
 
-const ListScreen = ({ navigation, route }) => {
+
+const ListScreen = ({ navigation}) => {
     return (
       <View>
         <Text>Movie Lists</Text>
         <SafeAreaView>
           <ScrollView>
             {
-            list.map((l, i) => (
-            <ListItem key={i} bottomDivider>
-              
-              <Avatar source={{uri: l.avatar_url}} />
-              <ListItem.Content>
-                <ListItem.Title>{l.title}</ListItem.Title>
-                <ListItem.Subtitle>{l.year}</ListItem.Subtitle>
-              </ListItem.Content>
-            </ListItem>
-             ))}
+            list.map((l, i) => {
+              if(l.ping==='0'){
+                return (<TouchableOpacity  onPress={() =>{
+                navigation.navigate('Movie',{ 
+                 item: l
+                }) 
+                }}>
+
+                  <ItemView  item={l}/>
+                </TouchableOpacity>)
+              }
+            })}
    
           </ScrollView>
         </SafeAreaView>
       </View>
     )
   };
-  
+
+
   export default ListScreen;

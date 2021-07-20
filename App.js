@@ -3,8 +3,6 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import { View,Text,StyleSheet, Button } from 'react-native';
-
 import { enableScreens } from 'react-native-screens';
 
 enableScreens();
@@ -12,6 +10,7 @@ enableScreens();
 import HomeScreen from './Components/HomeScreen';
 import ListScreen from './Components/List';
 import SearchScreen from './Components/Search';
+import MovieScreen from './Components/MovieScreen';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +25,7 @@ const MyStack = () => {
         />
         <Stack.Screen name="List" component={ListScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
+        <Stack.Screen name="Movie" component ={MovieScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

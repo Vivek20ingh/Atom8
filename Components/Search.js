@@ -1,12 +1,10 @@
 import React, {useState,useEffect} from "react";  
-import { SafeAreaView ,StyleSheet, View,Text,TextInput} from 'react-native';
-import { FlatList } from "react-native-gesture-handler";
-import { ListItem, Avatar } from 'react-native-elements'
+import { SafeAreaView ,StyleSheet, View,Text,TextInput, TouchableOpacity,Alert} from 'react-native';
+import ItemView from "./ItemView"
 
 import list from "./Movielist";
 
-
-const SearchScreen=() => {
+const SearchScreen=({navigation}) => {
 
   const [filterdData,setfilterdData]= useState([]);
   const [masterData,setmasterData]= useState([]);
@@ -40,22 +38,6 @@ const SearchScreen=() => {
     }
   }
 
-  const ItemView = ({item}) =>{
-    return(
-     
-     <ListItem>
-     <Avatar source={{uri: item.avatar_url}} />
-       <ListItem.Content>
-       <ListItem.Title>{item.title}</ListItem.Title>
-       <ListItem.Subtitle>{item.year}</ListItem.Subtitle>
-     </ListItem.Content>
-     </ListItem>
-     
-
-    )
-  }
-
-
   return(
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
@@ -67,12 +49,19 @@ const SearchScreen=() => {
           underlineColorAndroid="transparent"
           onChangeText={(text) => searchFilter(text) }
           />
-        <FlatList
-         data={filterdData}
-         keyExtractor={(item,index) => index.toString()}
-        
-        renderItem={ItemView}
-        />
+             {
+            filterdData.map((l, i) => {
+              if(l.ping==='0'){
+                return (<TouchableOpacity  onPress={() =>{
+                navigation.navigate('Movie',{ 
+                 item: l
+                }) 
+                }}>
+
+                  <ItemView  item={l}/>
+                </TouchableOpacity>)
+              }
+            })}
       </View>
     </SafeAreaView>
   );
@@ -94,4 +83,8 @@ const styles =StyleSheet.create({
     backgroundColor: 'white'
   }
 });
+
+
+
+
   export default SearchScreen;
