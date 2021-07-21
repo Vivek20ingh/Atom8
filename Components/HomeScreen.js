@@ -1,15 +1,14 @@
 import 'react-native-gesture-handler';
-import React ,{Component}from 'react';
-import { useState } from 'react';
+import React from 'react';
+
 
 
 import { View,Text,Button,StyleSheet,TextInput } from 'react-native';
-import { black } from 'chalk';
+
 
 
 
 const HomeScreen = ({ navigation }) => {
-  var Showtext="asdd";
  
   const [textInputValue, setTextInputValue] = React.useState('');
     return (
