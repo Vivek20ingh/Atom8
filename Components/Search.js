@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react";
 import { SafeAreaView ,StyleSheet, View,Text,TextInput, TouchableOpacity,Alert} from 'react-native';
 import ItemView from "./ItemView"
 
-import list from "./Movielist";
+import movielist from "./Movielist";
 
 const SearchScreen=({navigation}) => {
 
@@ -18,8 +18,8 @@ const SearchScreen=({navigation}) => {
   },[])
 
   const fetchPosts =() =>{
-    setfilterdData(list);
-    setmasterData(list);
+    setfilterdData(movielist);
+    setmasterData(movielist);
   }
 
   const searchFilter =(text) =>{
@@ -50,19 +50,15 @@ const SearchScreen=({navigation}) => {
           onChangeText={(text) => searchFilter(text) }
           />
              {
-            filterdData.map((l, i) => {
-              // l is object at ith index in list(filterData) from Movielist.js
-              // filterdata is list of movie of search character from list
-              if(l.ping==='0'){
-                //checking value of varialbe ping of object l is 0 or 1;
-
+            filterdData.map((movie, index) => {
+              if(movie.display==='true'){
                 return (<TouchableOpacity  onPress={() =>{
                 navigation.navigate('Movie',{ 
-                 item: l
+                  movie: movie
                 }) 
                 }}>
 
-                  <ItemView  item={l}/>
+                  <ItemView  movie={movie}/>
                 </TouchableOpacity>)
               }
             })}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text ,View,SafeAreaView,ScrollView, TouchableOpacity} from 'react-native';
-import list from './Movielist';
+import movielist from './Movielist';
 import ItemView from './ItemView';
 
 const ListScreen = ({ navigation}) => {
@@ -10,18 +10,15 @@ const ListScreen = ({ navigation}) => {
         <SafeAreaView>
           <ScrollView>
             {
-            list.map((l, i) => {
-              // l is object at ith index in list from Movielist.js
-              // filterdata is list of movie of search character from list
-              if(l.ping==='0'){
-                //checking value of varialbe ping of object l is 0 or 1;
+            movielist.map((movie, index) => {
+              if(movie.display==='true'){
                 return (<TouchableOpacity  onPress={() =>{
                 navigation.navigate('Movie',{ 
-                 item: l
+                 movie: movie
                 }) 
                 }}>
 
-                  <ItemView  item={l}/>
+                  <ItemView  movie={movie}/>
                 </TouchableOpacity>)
               }
             })}
