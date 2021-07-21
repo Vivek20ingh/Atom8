@@ -51,7 +51,11 @@ const SearchScreen=({navigation}) => {
           />
              {
             filterdData.map((l, i) => {
+              // l is object at ith index in list(filterData) from Movielist.js
+              // filterdata is list of movie of search character from list
               if(l.ping==='0'){
+                //checking value of varialbe ping of object l is 0 or 1;
+
                 return (<TouchableOpacity  onPress={() =>{
                 navigation.navigate('Movie',{ 
                  item: l

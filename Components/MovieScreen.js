@@ -8,6 +8,7 @@ import 'react-native-gesture-handler';
 const MovieScreen=({route: {params},navigation}) => {
 
     const { item } = params;
+    // item is object from Movielist.js that is pass from list.js and search.js onPress
 
     return(
         <SafeAreaView>
@@ -40,6 +41,7 @@ const MovieScreen=({route: {params},navigation}) => {
                 color="#008080"
                 onPress={() => {
                     item.ping='1';
+                    // changed intial value of ping from 0 to 1;
                     navigation.navigate('Home') 
                 }}
                 />

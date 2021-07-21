@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import React from 'react';
 
 
-import { View,Text,StyleSheet, Button } from 'react-native';
+import { View,Text,Button } from 'react-native';
 
 
 
@@ -13,7 +13,6 @@ const HomeScreen = ({ navigation }) => {
         <View style={{marginTop:40}} > 
         <Button
         title="List"
-       
         onPress={() =>
           navigation.navigate('List') }
         />
