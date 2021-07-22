@@ -41,9 +41,6 @@ const SearchScreen=({navigation}) => {
   return(
     
     <SafeAreaView style={{flex: 1}}>
-      <View>
-        <Button title="Go to Home" onPress={() => navigation.navigate('Home',{search: search})} />
-      </View>
       <View style={styles.container}>
 
         <Text style>Search Movie</Text>
