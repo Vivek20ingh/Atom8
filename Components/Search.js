@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from "react";  
-import { SafeAreaView ,StyleSheet, View,Text,TextInput, TouchableOpacity,Alert} from 'react-native';
+import { SafeAreaView ,StyleSheet, View,Text,TextInput, TouchableOpacity,Button} from 'react-native';
 import ItemView from "./ItemView"
-
+import SearchText from "./SearchText";
 import movielist from "./Movielist";
 
 const SearchScreen=({navigation}) => {
@@ -13,7 +13,6 @@ const SearchScreen=({navigation}) => {
   useEffect(() =>{
    fetchPosts();
     return()=>{
-
     }
   },[])
 
@@ -32,22 +31,30 @@ const SearchScreen=({navigation}) => {
       });
       setfilterdData(newData);
       setsearch(text);
+      SearchText.text=text;
     }else{
       setfilterdData(masterData);
       setsearch(text);
     }
   }
-
+  
   return(
+    
     <SafeAreaView style={{flex: 1}}>
+      <View>
+        <Button title="Go to Home" onPress={() => navigation.navigate('Home',{search: search})} />
+      </View>
       <View style={styles.container}>
-        <Text>Search Movie</Text>
+
+        <Text style>Search Movie</Text>
+        
         <TextInput 
           style= {styles.textInputStyle}
           value={search}
           placeholder="search Here"
           underlineColorAndroid="transparent"
-          onChangeText={(text) => searchFilter(text) }
+          onChangeText={
+            (text) => searchFilter(text) }
           />
              {
             filterdData.map((movie, index) => {
@@ -57,11 +64,11 @@ const SearchScreen=({navigation}) => {
                   movie: movie
                 }) 
                 }}>
-
                   <ItemView  movie={movie}/>
                 </TouchableOpacity>)
               }
             })}
+            
       </View>
     </SafeAreaView>
   );
@@ -83,8 +90,5 @@ const styles =StyleSheet.create({
     backgroundColor: 'white'
   }
 });
-
-
-
 
   export default SearchScreen;

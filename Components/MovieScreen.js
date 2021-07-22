@@ -8,7 +8,6 @@ import 'react-native-gesture-handler';
 const MovieScreen=({route: {params},navigation}) => {
 
     const { movie } = params;
-    // movie is object from Movielist.js that is pass from list.js and search.js onPress
 
     return(
         <SafeAreaView>
