@@ -1,0 +1,4 @@
+com/detoxtesting/DetoxTest.java
+ com.demoapp.DetoxTest
+com/demoapp/test/BuildConfig.java
+ com.demoapp.test.BuildConfig
