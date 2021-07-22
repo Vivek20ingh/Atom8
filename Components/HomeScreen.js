@@ -1,63 +1,57 @@
 import 'react-native-gesture-handler';
-import React from 'react';
+import React, {useState,useEffect} from 'react';
+import SearchText from './SearchText';
 
-
-
-import { View,Text,Button,StyleSheet,TextInput } from 'react-native';
-
-
+import { View,Text,Button,SafeAreaView,ScrollView} from 'react-native';
 
 
 const HomeScreen = ({ navigation }) => {
  
-  const [textInputValue, setTextInputValue] = React.useState('');
+  const[text,Searhtext]=useState(SearchText.text1);
+
+  const fetchSettings =() =>{
+   Searhtext(SearchText.text1)
+  }
+
+  useEffect(() => { const unsubscribe = navigation.addListener("focus",()=>{
+
+    fetchSettings() })
+    return unsubscribe;
+    
+    },[navigation])
+    
+  
     return (
-      
-      <View>
-        <Text testID='welcome'>Get Your Movie</Text>
-        <View style={{marginTop:40}} > 
-        <Button
-        title="List"
-        onPress={() =>
-          navigation.navigate('List') }
-        />
-        </View>
+      <SafeAreaView style={{flex: 1}}>
+         <ScrollView>
+          <View>
+             <Text testID='welcome'>Get Your Movie</Text>
 
-        <View style={{marginTop: 20}}>
-        < Button 
-        title="Search" 
-        onPress={() =>
-          navigation.navigate('Search') }
-        />
-        </View>
+           <View style={{marginTop:40}} > 
+             <Button
+             title="List"
+             onPress={() =>
+             navigation.navigate('List') }
+           />
+           </View>
+           
+           <View style={{marginTop: 20}}>
+             < Button 
+             title="Search" 
+             onPress={() =>
+             navigation.navigate('Search') }
+             />
+           </View>
+           
+           <View style={{margin:20}}>
+             <Text>Last Movie Search:   {text}</Text>
+           </View>
 
-        <View style={{margin:20}}>
-          <Text >{textInputValue}</Text>
-        </View>
-
-        <View>
-        <TextInput 
-          style= {styles.textInputStyle}
-          value={textInputValue}
-          underlineColorAndroid="transparent"
-          onChangeText={text => setTextInputValue(text)}
-	        placeholder="Insert your text!"
-          />
-        </View>
-      </View>
+           </View>
+         </ScrollView>
+       </SafeAreaView>
     );
   };
-
-  const styles =StyleSheet.create({
-    textInputStyle:{
-      height: 50,
-      borderWidth: 1,
-      paddingLeft: 20,
-      margin: 5,
-      borderColor: '#009688',
-      backgroundColor: 'white'
-    }
-  });
 
   export  default HomeScreen;
 
