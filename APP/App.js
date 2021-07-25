@@ -9,11 +9,8 @@ enableScreens();
 
 import HomeScreen from './Components/HomeScreen';
 import ListScreen from './Components/List';
-import SearchScreen from './Components/Search/Search';
 import MovieScreen from './Components/MovieScreen';
-import Counter from './Components/Count'
-import Countredux from './Components/Countredux';
-import SearchScreen1 from './Components/Search/Screen1';
+import SearchScreen from './Components/Search/Search/Screen1';
 
 const Stack = createStackNavigator();
 
@@ -28,10 +25,7 @@ const MyStack = () => {
         />
         <Stack.Screen name="List" component={ListScreen} />
         <Stack.Screen name="Search" component={SearchScreen} />
-        <Stack.Screen name="Search1" component={SearchScreen1} />
         <Stack.Screen name="Movie" component ={MovieScreen} />
-        <Stack.Screen name ="Count" component={Counter}/>
-        <Stack.Screen name ="Redux" component={Countredux}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

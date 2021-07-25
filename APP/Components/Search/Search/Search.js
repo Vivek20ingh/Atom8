@@ -1,17 +1,19 @@
 import React, {useState,useEffect} from "react";  
 import { SafeAreaView ,StyleSheet, View,Text,TextInput, TouchableOpacity,Button} from 'react-native';
-import ItemView from "../ItemView";
-import SearchText from "./SearchText";
-import movielist from "../Movielist";
+import ItemView from "../../ItemView";
+import SearchText from "../SearchText";
+import movielist from "../../Movielist";
 import { Provider } from 'react-redux';
-import store from './store';
-import Textthroughredux from './TextApp'
-import Selectortext from "./TextAppSelector";
-
-import { useSelector, useDispatch } from 'react-redux'
+import store from "../store";
+import { useNavigation } from '@react-navigation/native';
 
 
-const SearchScreen=({navigation,text1}) => {
+import { useDispatch } from 'react-redux'
+
+
+const Search=() => {
+
+  const navigation = useNavigation();
 
   const [filterdData,setfilterdData]= useState([]);
   const [masterData,setmasterData]= useState([]);
@@ -40,21 +42,18 @@ const SearchScreen=({navigation,text1}) => {
       setfilterdData(newData);
       setsearch(text);
       SearchText.text=text;
+      dispatch({type:'CHANGE_TEXT'})
     }else{
       setfilterdData(masterData);
       setsearch(text);
     }
   }
+  const dispatch = useDispatch()
   return(
     
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
-      <Provider store={store}>
-        <Textthroughredux/>
-         <Selectortext/>
-      </Provider>
         <Text style>Search Movie</Text>
-        
         <TextInput 
           style= {styles.textInputStyle}
           value={search}
@@ -62,9 +61,7 @@ const SearchScreen=({navigation,text1}) => {
           underlineColorAndroid="transparent"
           onChangeText={
             (text) => searchFilter(text)
-            // dispatch({type:'CHANGE_TEXT'})
            }
-            
           />
              {
             filterdData.map((movie, index) => {
@@ -103,4 +100,4 @@ const styles =StyleSheet.create({
 
 
 
-export default SearchScreen;
+export default Search;

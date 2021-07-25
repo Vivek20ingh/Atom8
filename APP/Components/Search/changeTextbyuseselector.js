@@ -1,13 +1,11 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 
-import {View,TouchableOpacity,Text,Button} from 'react-native'
+import {View,Text} from 'react-native'
 
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector} from 'react-redux'
 
 const TextThroughUseSelectortext=()=> {
-
-    const dispatch = useDispatch()
 
   const mytext=useSelector((state)=>{
     return state.text1
