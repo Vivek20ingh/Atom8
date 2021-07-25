@@ -1,10 +1,17 @@
 import React, {useState,useEffect} from "react";  
 import { SafeAreaView ,StyleSheet, View,Text,TextInput, TouchableOpacity,Button} from 'react-native';
-import ItemView from "./ItemView"
+import ItemView from "../ItemView";
 import SearchText from "./SearchText";
-import movielist from "./Movielist";
+import movielist from "../Movielist";
+import { Provider } from 'react-redux';
+import store from './store';
+import Textthroughredux from './TextApp'
+import Selectortext from "./TextAppSelector";
 
-const SearchScreen=({navigation}) => {
+import { useSelector, useDispatch } from 'react-redux'
+
+
+const SearchScreen=({navigation,text1}) => {
 
   const [filterdData,setfilterdData]= useState([]);
   const [masterData,setmasterData]= useState([]);
@@ -15,6 +22,7 @@ const SearchScreen=({navigation}) => {
     return()=>{
     }
   },[])
+
 
   const fetchPosts =() =>{
     setfilterdData(movielist);
@@ -37,12 +45,14 @@ const SearchScreen=({navigation}) => {
       setsearch(text);
     }
   }
-  
   return(
     
     <SafeAreaView style={{flex: 1}}>
       <View style={styles.container}>
-
+      <Provider store={store}>
+        <Textthroughredux/>
+         <Selectortext/>
+      </Provider>
         <Text style>Search Movie</Text>
         
         <TextInput 
@@ -51,7 +61,10 @@ const SearchScreen=({navigation}) => {
           placeholder="search Here"
           underlineColorAndroid="transparent"
           onChangeText={
-            (text) => searchFilter(text) }
+            (text) => searchFilter(text)
+            // dispatch({type:'CHANGE_TEXT'})
+           }
+            
           />
              {
             filterdData.map((movie, index) => {
@@ -65,7 +78,7 @@ const SearchScreen=({navigation}) => {
                 </TouchableOpacity>)
               }
             })}
-            
+
       </View>
     </SafeAreaView>
   );
@@ -88,4 +101,6 @@ const styles =StyleSheet.create({
   }
 });
 
-  export default SearchScreen;
+
+
+export default SearchScreen;
